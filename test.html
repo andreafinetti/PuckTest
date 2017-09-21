@@ -1,9 +1,333 @@
 <html>
- <head>
- </head>
- <body>
-  <script src="https://www.puck-js.com/puck.js"></script>
-  <button onclick="Puck.write('LED1.set();\n');">On!</button>
-  <button onclick="Puck.write('LED1.reset();\n');">Off!</button>
- </body>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+		<title>StopWatching</title>
+		<style>
+			#status
+			{
+				width: 40%;
+				text-align: right;
+				font-size: 20px;
+				letter-spacing: 1px;
+				float:right;
+			}
+			#statday
+			{
+				width: 40%;
+				text-align: left;
+				font-size: 20px;
+				letter-spacing: 1px;
+				float: left;
+			}
+			#output1
+			{
+				width: 40%;
+				background-color:red;
+				text-align: center;
+				font-size: 28px;
+				letter-spacing: 1px;
+				padding: 7px;
+				float:left;
+			}
+			#output2
+			{
+				width: 40%;
+				background-color:00C8C8;
+				text-align: center;
+				font-size: 28px;
+				letter-spacing: 1px;
+				padding: 7px;
+				float:right;
+			}
+			#tag1
+			{
+				width: 25%;
+				font-size: 15px;
+				letter-spacing: 1px;
+				float:left;
+				text-align:left;
+				color:red;
+			}
+			#tag2
+			{
+				width: 40%;
+				font-size: 15px;
+				letter-spacing: 1px;
+			}
+			#startPause
+			{
+				color: #DAD6D6;
+				background: #009800;
+				border:solid 1px #007500;
+				border-radius:3px;
+				padding-top:5px;
+				padding-bottom: 5px;
+				letter-spacing: 1px;
+				cursor: pointer;
+				font-size: 15px;
+				width: 42%;
+				float: left;
+			}
+			#reset
+			{
+				color: #DAD6D6;
+				background: #0050cc;
+				border:solid 2px #0000cc;
+				border-radius:5px;
+				padding-top:5px;
+				padding-bottom: 5px;
+				letter-spacing: 1px;
+				cursor:pointer;
+				font-size: 15px;
+				width: 42%;
+				float: right;
+			}
+			#adv1
+			{
+
+				color: red;
+				text-align: left;
+				font-size: 15px;
+				letter-spacing: 1px;
+				float:left;
+				padding: 10px;
+				width: 40%;
+      }
+			#adv2
+			{
+				color: blue;
+				text-align: left;
+				font-size: 15px;
+				letter-spacing: 1px;
+				padding: 10px;
+				float:right;
+				width: 40%;
+				text-align: right;
+      }
+			#day
+			{
+				text-align: left;
+				font-size: 15px;
+				letter-spacing: 1px;
+				padding: 10px;
+				float:left;
+				width: 90%;
+      }
+		</style>
+		<script>
+		{
+			var time1 = 0;
+			var time2 = 0;
+			var running1 = 0;
+			var running2 = 1;
+			var flag = false;
+			var log = true;
+			var i = 1;
+			var out1 = "";
+			var out2 = "";
+			var j = "";
+
+			function startPause()
+			{
+				if(flag == false)
+				{
+					running2 = 1;
+				}
+				if(running1 == 0 && running2 == 1 && flag == false)
+				{
+					log=false;
+					login();
+					running1 = 1;
+					running2 = 0;
+					flag = true;
+					increment1();
+					document.getElementById("startPause").innerHTML = "TIMER ACTIVE";
+					document.getElementById("status").innerHTML = "THE USER IS ACTIVE";
+				}
+				else if(running1 == 1 && running2 == 0 && flag == true)
+				{
+					log = true;
+					login();
+					running1 = 0;
+					running2 = 1;
+					flag = false;
+					increment2();
+					document.getElementById("startPause").innerHTML = "TIMER NOT ACTIVE";
+					document.getElementById("status").innerHTML = "THE USER IS NOT ACTIVE";
+				}
+			}
+			function reset()
+			{
+				var hours1 = Math.floor(time1/10/60/60) % 60;
+				var mins1 = Math.floor(time1/10/60) % 60;
+				var secs1 = Math.floor(time1/10) % 60;
+				var tenths1 = (time1 % 10)+1;
+
+				if(hours1 < 10){hours1 = "0" + hours1;}
+				if(mins1 < 10){mins1 = "0" + mins1;}
+				if(secs1 < 10){secs1 = "0" + secs1;}
+				if(tenths1 >= 10){secs1++; tenths1=0;}
+
+				out1 = "ACTIVE FOR " + hours1 + ":" + mins1 + ":" + secs1 + ":" + tenths1;
+
+				var hours2 = Math.floor(time2/10/60/60) % 60;
+				var mins2 = Math.floor(time2/10/60) % 60;
+				var secs2 = Math.floor(time2/10) % 60;
+				var tenths2 = (time2 % 10)+1;
+
+				if(hours2 < 10){hours2 = "0" + hours2;}
+				if(mins2 < 10){mins2 = "0" + mins2;}
+				if(secs2 < 10){secs2 = "0" + secs2;}
+				if(hours2 >= 3){running2 == 0;}
+				if(tenths2 >= 10){secs2++; tenths2=0;}
+
+				out2 = "INACTIVE FOR " + hours2 + ":" + mins2 + ":" + secs2 + ":" + tenths2;
+
+				time1 = -1;
+				time2 = -1;
+				flag = false;
+				running1 = 0;
+				running2 = 0;
+
+				var result1 = out1.fontcolor("red");
+				var result2 = out2.fontcolor("blue");
+				j = j + "DAY " + i + " " + result1 + " " + result2 + "<br>";
+				document.getElementById("day").innerHTML = j;
+				i++;
+
+				document.getElementById("statday").innerHTML = "DAY " + i;
+				document.getElementById("startPause").disabled = false;
+				document.getElementById("output1").innerHTML ="00:00:00:0";
+				document.getElementById("output2").innerHTML ="00:00:00:0";
+				document.getElementById("startPause").innerHTML = "START";
+				document.getElementById("adv1").innerHTML = "ACTIVE FOR 0:00:00:00";
+				document.getElementById("adv2").innerHTML = "INACTIVE FOR 0:00:00:00";
+				document.getElementById("status").innerHTML = "THE USER IS";
+
+			}
+
+			function increment1()
+			{
+				if(running1 == 1)
+				{
+					setTimeout(function(){
+						time1++;
+						var hours1 = Math.floor(time1/10/60/60) % 24;
+						var mins1 = Math.floor(time1/10/60) % 60;
+						var secs1 = Math.floor(time1/10) % 60;
+						var tenths1 = time1 % 10;
+
+						if(hours1 < 10){hours1 = "0" + hours1;}
+						if(mins1 < 10){mins1 = "0" + mins1;}
+						if(secs1 < 10){secs1 = "0" + secs1;}
+						if(hours1 >= 3){running1 == 0;}
+						document.getElementById("output1").innerHTML = hours1 + ":" + mins1 + ":" + secs1 + ":" + tenths1;
+						increment1();
+					}, 100);
+				}
+			}
+
+			function increment2()
+			{
+					if(running2 == 1)
+					{
+						setTimeout(function(){
+							time2++;
+							var hours2 = Math.floor(time2/10/60/60) % 60;
+							var mins2 = Math.floor(time2/10/60) % 60;
+							var secs2 = Math.floor(time2/10) % 60;
+							var tenths2 = time2 % 10;
+
+							if(hours2 < 10){hours2 = "0" + hours2;}
+							if(mins2 < 10){mins2 = "0" + mins2;}
+							if(secs2 < 10){secs2 = "0" + secs2;}
+							if(hours2 >= 3){running2 == 0;}
+							document.getElementById("output2").innerHTML = hours2 + ":" + mins2 + ":" + secs2 + ":" + tenths2;
+							increment2();
+						}, 100);
+					}
+			}
+			function login()
+			{
+				if(log)
+				{
+					if(time1==(-1) || time1==0)
+					{
+						document.getElementById("adv1").innerHTML = "ACTIVE FOR 0:00:00:00";
+					}
+					else
+					{
+
+						var hours = Math.floor(time1/10/60/60) % 60;
+						var mins = Math.floor(time1/10/60) % 60;
+						var secs = Math.floor(time1/10) % 60;
+						var tenths = (time1 % 10)+1;
+
+						if(hours < 10){hours = "0" + hours;}
+						if(mins < 10){mins = "0" + mins;}
+						if(secs < 10){secs = "0" + secs;}
+						if(hours >= 3){running1 == 0;}
+						if(tenths >= 10){secs++; tenths=0;}
+
+						out1 = "ACTIVE FOR " + hours + ":" + mins + ":" + secs + ":" + tenths;
+
+						document.getElementById("adv1").innerHTML =out1;
+					}
+				}
+				else
+				{
+					if(time2==(-1) || time2==0)
+					{
+						document.getElementById("adv2").innerHTML = "INACTIVE FOR 0:00:00:00";
+					}
+					else
+					{
+
+            var hours = Math.floor(time2/10/60/60) % 60;
+						var mins = Math.floor(time2/10/60) % 60;
+						var secs = Math.floor(time2/10) % 60;
+						var tenths = (time2 % 10)+1;
+
+						if(hours < 10){hours = "0" + hours;}
+						if(mins < 10){mins = "0" + mins;}
+						if(secs < 10){secs = "0" + secs;}
+						if(hours >= 3){running1 == 0;}
+						if(tenths >= 10){secs++; tenths=0;}
+
+						out2 = "INACTIVE FOR " + hours + ":" + mins + ":" + secs + ":" + tenths;
+
+						document.getElementById("adv2").innerHTML =out2;
+					}
+				}
+			}
+		}
+		</script>
+	</head>
+	<body>
+		<div>
+			<h1 id="status" style="float:center;">THE USER IS </h1>
+			<h1 id="statday" style="float:center;">DAY 1</h1>
+			<h1 id="tag1" style="">ACTIVE</h1>
+			<h1 id="tag2" style="float:right; text-align:right; margin-left:65px; color:blue;">NOT ACTIVE</h1>
+		</div>
+		<div>
+			<h1 id="output1">00:00:00:0</h1>
+			<h1 id="output2">00:00:00:0</h1>
+		</div>
+		<div>
+			<button id="startPause" onclick="startPause()">START</button>
+			<button id="reset" onclick="reset()">RESET</button>
+		</div>
+		<div>
+			<h1 id="adv1">ACTIVE FOR 0:00:00:00</h1>
+			<h1 id="adv2">INACTIVE FOR 0:00:00:00</h1>
+			<h1 id="day"></h1>
+		</div>
+		<div>
+			<h1 id="ccc"></h1>
+		</div>
+	</body>
 </html>
