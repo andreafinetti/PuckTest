@@ -145,9 +145,9 @@
 			
 			function resetListening(){
 			  setInterval( function(){
-			    Puck.eval("BTN.read()",function(x) {
-			      console.log(x);
-			      if( x ) {
+			    Puck.eval("BTN.read()",function(y) {
+			      console.log(y);
+			      if( y ) {
 				// Scrivi quello che vuoi fare quando premi il pulsante
 				reset();
 			      }
@@ -323,7 +323,7 @@
 		</div>
 		<div>
 			<button id="startPause" onclick="startListening()">START</button>
-			<button id="reset" onclick="resetListening()">RESET</button>
+			<button id="reset" onclick="reset()">RESET</button>
 		</div>
 		<div>
 			<h1 id="adv1">ACTIVE FOR 0:00:00:00</h1>
