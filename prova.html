@@ -129,25 +129,19 @@
 			var out1 = "";
 			var out2 = "";
 			var j = "";
-			var iter = 0;
 			
-			function startListening(c){
-			  iter = c;
-			  setInterval( function(){
-			    Puck.eval("BTN.read()",function(x) {
-			      console.log(x);
-			      if( x ) {
-				// Scrivi quello che vuoi fare quando premi il pulsante
-				startPause();
-			      }
-			    });
-			  },c);
+			function startListening(){
+			  Puck.eval("BTN.read()",function(x) {
+			    console.log(x);
+			    if( x ) {
+			      // Scrivi quello che vuoi fare quando premi il pulsante
+		       	      startPause();
+			    }
+			  });
 		      	}
 			
 			function startPause()
 			{
-				
-				alert(iter);
 				if(flag == false)
 				{
 					running2 = 1;
@@ -313,7 +307,7 @@
 			<h1 id="output2">00:00:00:0</h1>
 		</div>
 		<div>
-			<button id="startPause" onclick="startListening(150)">START</button>
+			<button id="startPause" onclick="startListening()">START</button>
 			<button id="reset" onclick="reset()">RESET</button>
 		</div>
 		<div>
