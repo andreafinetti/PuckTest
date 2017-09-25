@@ -130,15 +130,17 @@
 			var out2 = "";
 			var j = "";
 			
-			function startListening(){
-			  Puck.eval("BTN.read()",function(x) {
-			    console.log(x);
-			    if( x ) {
-			      // Scrivi quello che vuoi fare quando premi il pulsante
-		       	      startPause();
-			    }
-			  });
-		      	}
+			setWatch(function(e) {
+  			  var len = e.time-e.lastTime;
+ 			    if(len>0.3)
+  			    {
+    			      controls.next();
+ 			    }
+  			    else
+ 			    {
+    			      controls.playpause();
+ 			    }
+			}, BTN, { edge:"falling", repeat:true, debounce:50});
 			
 			function startPause()
 			{
@@ -307,7 +309,7 @@
 			<h1 id="output2">00:00:00:0</h1>
 		</div>
 		<div>
-			<button id="startPause" onclick="startListening()">START</button>
+			<button id="startPause" onclick="setWatch()">START</button>
 			<button id="reset" onclick="reset()">RESET</button>
 		</div>
 		<div>
