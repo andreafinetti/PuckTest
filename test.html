@@ -137,7 +137,7 @@
 			      console.log(x);
 			      if( x ) {
 				// Scrivi quello che vuoi fare quando premete il pulsante
-				startPause();
+				reset();
 			      }
 			    });
 			  },150);
@@ -331,8 +331,8 @@
 			<h1 id="output2">00:00:00:0</h1>
 		</div>
 		<div>
-			<button id="startPause" onclick="startListening()">START</button>
-			<button id="reset" onclick="reset()">RESET</button>
+			<button id="startPause" onclick="startPause">START</button>
+			<button id="reset" onclick="startListening()">RESET</button>
 		</div>
 		<div>
 			<h1 id="adv1">ACTIVE FOR 0:00:00:00</h1>
