@@ -141,13 +141,7 @@
 			      }
 			    });
 			  },300);
-		      	}
-			
-			
-			function resetListening(){
-			  
-			  setInterval( function(){
-			    Puck.eval("BTN.read()",function(x) {
+			  Puck.eval("BTN.read()",function(x) {
 			      console.log(x);
 			      if( x ) {
 				// Scrivi quello che vuoi fare quando premi il pulsante
