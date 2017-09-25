@@ -129,6 +129,7 @@
 			var out1 = "";
 			var out2 = "";
 			var j = "";
+			
 			function startListening(){
 			  setInterval( function(){
 			    Puck.eval("BTN.read()",function(x) {
@@ -138,7 +139,7 @@
 				startPause();
 			      }
 			    });
-			  },500);
+			  },200);
 		      	}
 			
 			function startPause()
