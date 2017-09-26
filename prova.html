@@ -5,7 +5,7 @@
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-		<title>StopWatching</title>
+		<title>Prova</title>
 		<style>
 			#status
 			{
@@ -131,7 +131,8 @@
 			var out2 = "";
 			var j = "";
 			var cont = 0;
-
+			var a = true;
+			
 			function startListening(){
 				setInterval( function(){
 					Puck.eval("BTN.read()",function(x) {
@@ -145,7 +146,20 @@
 								}
 								else
 								{
-									startPause();
+									if(a === true)
+									{	
+										Puck.write('LED1.reset();\n');
+										Puck.write('LED2.set();\n');
+										a = false;
+										startPause();
+									}
+									else
+									{
+										Puck.write('LED2.reset();\n');
+										Puck.write('LED1.set();\n');
+										a = true;
+										startPause();
+									}
 								}
 							},400);
 						}
@@ -214,6 +228,7 @@
 				flag = false;
 				running1 = 0;
 				running2 = 0;
+				a = true;
 
 				var result1 = out1.fontcolor("red");
 				var result2 = out2.fontcolor("blue");
