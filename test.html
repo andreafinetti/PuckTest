@@ -137,7 +137,7 @@
 					Puck.eval("BTN.read()",function(x) {
 						console.log(x);
 						if(x === true) {
-							setTimeout(Puck.eval("BTN.read()",function(x) {
+							setTimeout(function(x) {
 								console.log(x);
 								if(x === true) {
 									
@@ -147,7 +147,7 @@
 								{
 									startPause();
 								}
-							}),400);
+							},400);
 						}
 					});
 				},1000);	
