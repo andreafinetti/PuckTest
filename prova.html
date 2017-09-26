@@ -137,12 +137,10 @@
 					Puck.eval("BTN.read()",function(x) {
 						console.log(x);
 						if(x === true) {
-							var start = new Date();
-							
-							setTimeout(Puck.eval("BTN.read()",function(x) {
+							setTimeout(function(x) {
 								console.log(x);
-								alert("Hello! I am an alert box!! " + x);
-								if(x === true) 
+								alert("Hello! I am an alert box!! " + digitalRead(BTN));
+								if(digitalRead(BTN)) 
 								{
 									reset();
 									startListening();
@@ -170,7 +168,7 @@
 										
 									}
 								}
-							}),300);
+							},300);
 						}
 					});
 				},500);	
