@@ -130,15 +130,16 @@
 			var out1 = "";
 			var out2 = "";
 			var j = "";
+			var cont = 0;
 
 			function startListening(){
 				setInterval( function(){
 					Puck.eval("BTN.read()",function(x) {
 						console.log(x);
 						if(x === true) {
-							x = setTimeout(function(x){
+							setTimeout(Puck.eval("BTN.read()",function(x) {
 								console.log(x);
-								if(x === false) {
+								if(x === true) {
 									
 									reset();
 								}
@@ -146,7 +147,7 @@
 								{
 									startPause();
 								}
-							},400);
+							}),400);
 						}
 					});
 				},1000);	
