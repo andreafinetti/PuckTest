@@ -133,20 +133,20 @@
 
 			function startListening(){
 				setInterval( function(){
-				Puck.eval("BTN.read()",function(x) {
-					setTimeout(function(){
-						console.log(x);
-						if( x ) {
-							// Scrivi quello che vuoi fare quando premete il pulsante
-							reset();
-						}
-						else
-						{
-							startPause();
-						}
-					},150);
-				});
-				},500);	
+					Puck.eval("BTN.read()",function(x) {
+						setTimeout(function(){
+							console.log(x);
+							if(x) {
+								// Scrivi quello che vuoi fare quando premete il pulsante
+								reset();
+							}
+							else
+							{
+								startPause();
+							}
+						},300);
+					});
+				},800);	
 		      	}
 			
 			function startPause()
@@ -337,7 +337,7 @@
 			<h1 id="output2">00:00:00:0</h1>
 		</div>
 		<div>
-			<button id="startPause" onclick="startPause()">START</button>
+			<button id="startPause" onclick="startListening()">START</button>
 			<button id="reset" onclick="startListening()">RESET</button>
 		</div>
 		<div>
