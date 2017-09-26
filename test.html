@@ -134,17 +134,19 @@
 			function startListening(){
 				setInterval( function(){
 					Puck.eval("BTN.read()",function(x) {
-						setTimeout(function(){
-							console.log(x);
-							if(x) {
-								// Scrivi quello che vuoi fare quando premete il pulsante
-								reset();
-							}
-							else
-							{
-								startPause();
-							}
-						},300);
+						console.log(x);
+						if(x === true) {
+							x = setTimeout(function(x){
+								if(x === true) {
+									// Scrivi quello che vuoi fare quando premete il pulsante
+									reset();
+								}
+								else
+								{
+									startPause();
+								}
+							},300);
+						}
 					});
 				},800);	
 		      	}
