@@ -132,15 +132,21 @@
 			var j = "";
 
 			function startListening(){
-			  setInterval( function(){
-			    Puck.eval("BTN.read()",function(x) {
-			      console.log(x);
-			      if( x ) {
-				// Scrivi quello che vuoi fare quando premete il pulsante
-				reset();
-			      }
-			    });
-			  },150);
+				setInterval( function(){
+				Puck.eval("BTN.read()",function(x) {
+					setTimeout(function(){
+						console.log(x);
+						if( x ) {
+							// Scrivi quello che vuoi fare quando premete il pulsante
+							reset();
+						}
+						else
+						{
+							startPause();
+						}
+					},150);
+				});
+				},500);	
 		      	}
 			
 			function startPause()
