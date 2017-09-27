@@ -137,41 +137,45 @@
 					Puck.eval("BTN.read()",function(x){
 						if(x)
 						{
-							alert("Hello! " + digitalRead(BTN));
+							alert("Hello! " + x);
 							setTimeout(function(){	
-								if(digitalRead(BTN)) {
-									alert("Hello! I am an alert box!!");
-									setTimeout(function() {
-										if(digitalRead(BTN)) 
-										{
-											reset();
-											startListening();
-											Puck.write('LED1.reset();\n');
-											Puck.write('LED2.reset();\n');
-											Puck.write('LED3.set();\n');
-										}
-										else
-										{
-											if(a === true)
-											{	
-												Puck.write('LED1.reset();\n');
-												Puck.write('LED3.reset();\n');
-												Puck.write('LED2.set();\n');
-												a = false;
-												startPause();
-											}
-											else
-											{
-												Puck.write('LED2.reset();\n');
-												Puck.write('LED3.reset();\n');
-												Puck.write('LED1.set();\n');
-												a = true;
-												startPause();
+								Puck.eval("BTN.read()",function(x){
+									if(x) {
+										alert("Hello! " + x);
+										setTimeout(function() {
+											Puck.eval("BTN.read()",function(x){
+												if(x) 
+												{
+													reset();
+													startListening();
+													Puck.write('LED1.reset();\n');
+													Puck.write('LED2.reset();\n');
+													Puck.write('LED3.set();\n');
+												}
+												else
+												{
+													if(a === true)
+													{	
+														Puck.write('LED1.reset();\n');
+														Puck.write('LED3.reset();\n');
+														Puck.write('LED2.set();\n');
+														a = false;
+														startPause();
+													}
+													else
+													{
+														Puck.write('LED2.reset();\n');
+														Puck.write('LED3.reset();\n');
+														Puck.write('LED1.set();\n');
+														a = true;
+														startPause();
 
-											}
-										}
-									},300);
-								}
+													}
+												}
+											});
+										},300);
+									}
+								});
 							},200);
 						}
 					});
