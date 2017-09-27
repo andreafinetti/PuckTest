@@ -135,7 +135,7 @@
 			function startListening(){
 				setInterval( function(){
 					Puck.eval("BTN.read()",function(x){
-						if(digitalRead(BTN))
+						if(x)
 						{
 							alert("Hello! " + digitalRead(BTN));
 							setTimeout(function(){	
