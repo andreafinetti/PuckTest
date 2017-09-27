@@ -137,6 +137,7 @@
 					Puck.eval("BTN.read()",function(x){
 						if(digitalRead(BTN))
 						{
+							alert("Hello! " + digitalRead(BTN));
 							setTimeout(function(){	
 								if(digitalRead(BTN)) {
 									alert("Hello! I am an alert box!!");
