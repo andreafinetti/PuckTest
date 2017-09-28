@@ -150,6 +150,7 @@
 													Puck.write('LED1.reset();\n');
 													Puck.write('LED2.reset();\n');
 													Puck.write('LED3.set();\n');
+													Puck.write('LED3.reset();\n');
 												}
 												else
 												{
@@ -158,6 +159,7 @@
 														Puck.write('LED1.reset();\n');
 														Puck.write('LED3.reset();\n');
 														Puck.write('LED2.set();\n');
+														Puck.write('LED2.reset();\n');
 														a = false;
 														startPause();
 													}
@@ -166,6 +168,7 @@
 														Puck.write('LED2.reset();\n');
 														Puck.write('LED3.reset();\n');
 														Puck.write('LED1.set();\n');
+														Puck.write('LED1.reset();\n');
 														a = true;
 														startPause();
 
@@ -175,10 +178,10 @@
 										},300);
 									}
 								});
-							},200);
+							},300);
 						}
 					});
-				},700);	
+				},900);	
 		      	}
 			
 			function startPause()
