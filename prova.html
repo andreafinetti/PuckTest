@@ -133,54 +133,67 @@
 			var a = true;
 			
 			function startListening(){
-				setInterval( function(){
-					Puck.eval("BTN.read()",function(x){
-						if(x)
-						{
-							setTimeout(function(){	
-								Puck.eval("BTN.read()",function(x){
-									if(x) {
-										setTimeout(function() {
-											Puck.eval("BTN.read()",function(x){
-												if(x) 
-												{
-													reset();
-													startListening();
+				Puck.eval("BTN.read()",function(x){
+					if(x)
+					{
+						setTimeout(function(){	
+							Puck.eval("BTN.read()",function(x){
+								if(x) {
+									setTimeout(function() {
+										Puck.eval("BTN.read()",function(x){
+											if(x) 
+											{
+												reset();
+												startListening();
+												Puck.write('LED1.reset();\n');
+												Puck.write('LED2.reset();\n');
+												Puck.write('LED3.set();\n');
+												Puck.write('LED3.reset();\n');
+												
+											}
+											else
+											{
+												if(a === true)
+												{	
 													Puck.write('LED1.reset();\n');
-													Puck.write('LED2.reset();\n');
-													Puck.write('LED3.set();\n');
 													Puck.write('LED3.reset();\n');
+													Puck.write('LED2.set();\n');
+													Puck.write('LED2.reset();\n');
+													a = false;
+													startPause();
+													startListening();
 												}
 												else
 												{
-													if(a === true)
-													{	
-														Puck.write('LED1.reset();\n');
-														Puck.write('LED3.reset();\n');
-														Puck.write('LED2.set();\n');
-														Puck.write('LED2.reset();\n');
-														a = false;
-														startPause();
-													}
-													else
-													{
-														Puck.write('LED2.reset();\n');
-														Puck.write('LED3.reset();\n');
-														Puck.write('LED1.set();\n');
-														Puck.write('LED1.reset();\n');
-														a = true;
-														startPause();
+													Puck.write('LED2.reset();\n');
+													Puck.write('LED3.reset();\n');
+													Puck.write('LED1.set();\n');
+													Puck.write('LED1.reset();\n');
+													a = true;
+													startPause();
+													startListening();
 
-													}
 												}
-											});
-										},400);
-									}
-								});
-							},150);
-						}
-					});
-				},600);	
+											}
+											else
+											{
+												startListening();
+											}
+										});
+									},400);
+								}
+								else
+								{
+									startListening();
+								}
+							});
+						},150);
+					}
+					else
+					{
+						startListening();
+					}
+				});
 		      	}
 			
 			function startPause()
