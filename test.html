@@ -138,19 +138,20 @@
 						console.log(x);
 						if(x === true) {
 							setTimeout(function(x) {
-								console.log(x);
-								if(x === true) {
-									
-									reset();
-								}
-								else
-								{
-									startPause();
-								}
-							},400);
+								Puck.eval("BTN.read()",function(x) {
+									if(x === true) 
+									{	
+										reset();
+									}
+									else
+									{
+										startPause();
+									}
+								});
+							},200);
 						}
 					});
-				},1000);	
+				},500);	
 		      	}
 			
 			function startPause()
@@ -342,7 +343,7 @@
 		</div>
 		<div>
 			<button id="startPause" onclick="startListening()">START</button>
-			<button id="reset" onclick="">RESET</button>
+			<button id="reset" onclick="reset()">RESET</button>
 		</div>
 		<div>
 			<h1 id="adv1">ACTIVE FOR 0:00:00:00</h1>
