@@ -135,16 +135,11 @@
 			function startListening(){
 				setInterval( function(){
 					Puck.eval("BTN.read()",function(x) {
-						console.log(x);
 						if(x === true) {
 							setTimeout(function(x) {
 								Puck.eval("BTN.read()",function(x) {
 									if(x === true) 
 									{	
-										reset();
-									}
-									else
-									{
 										startPause();
 									}
 								});
