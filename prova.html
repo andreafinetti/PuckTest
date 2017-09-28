@@ -137,10 +137,10 @@
 					Puck.eval("BTN.read()",function(x){
 						if(x)
 						{
-							alert("Hello! " + x);
 							setTimeout(function(){	
 								Puck.eval("BTN.read()",function(x){
 									if(x) {
+										alert("Hello! " + x);
 										setTimeout(function() {
 											Puck.eval("BTN.read()",function(x){
 												if(x) 
