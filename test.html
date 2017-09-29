@@ -162,8 +162,11 @@
 												{	
 													Puck.write('LED1.reset();\n');
 													Puck.write('LED3.reset();\n');
-													Puck.write('LED2.set();\n');
-													Puck.write('LED2.reset();\n');
+													setInterval(function()
+													{
+														Puck.write('LED2.set();\n');
+														Puck.write('LED2.reset();\n');
+													}, 3000);
 													a = false;
 													startPause();
 													startListening();
@@ -172,9 +175,11 @@
 												{
 													Puck.write('LED2.reset();\n');
 													Puck.write('LED3.reset();\n');
-													Puck.write('LED1.set();\n');
-													Puck.write('LED1.reset();\n');
-													a = true;
+													setInterval(function()
+													{
+														Puck.write('LED1.set();\n');
+														Puck.write('LED1.reset();\n');
+													}, 3000);
 													startPause();
 													startListening();
 												}
