@@ -163,19 +163,19 @@
 											{
 												if(a === true)
 												{	
-													Puck.write('LED3.reset();\n');
-													ledswitch();
 													a = false;
 													startPause();
 													startListening();
+													Puck.write('LED3.reset();\n');
+													ledswitch();
 												}
 												else
 												{
-													Puck.write('LED3.reset();\n');
-													ledswitch();
 													a = true;
 													startPause();
 													startListening();
+													Puck.write('LED3.reset();\n');
+													ledswitch();
 												}
 											}
 										});
