@@ -136,7 +136,6 @@
 			var out2 = "";
 			var j = "";
 			var a = true;
-			var f = true;
 			
 			function startListening(){
 				Puck.eval("BTN.read()",function(x){
@@ -162,20 +161,16 @@
 												if(a)
 												{	
 													a = false;
-													f = false;
 													startPause();
 													startListening();
 													Puck.write('LED3.reset();\n');
-													ledswitch();
 												}
 												else
 												{
 													a = true;
-													f = true;
 													startPause();
 													startListening();
 													Puck.write('LED3.reset();\n');
-													ledswitch();
 												}
 											}
 										});
@@ -194,28 +189,6 @@
 					}
 				});
 		      	}
-			
-			function ledswitch()
-			{
-				if(f)
-				{
-					setTimeout(function()
-						{
-							Puck.write('LED2.set();\n');
-							Puck.write('LED2.reset();\n');
-							ledswitch();
-						}, 3000);
-				}
-				else
-				{
-					setTimeout(function()
-						{
-							Puck.write('LED1.set();\n');
-							Puck.write('LED1.reset();\n');
-							ledswitch();
-						}, 3000);
-				}
-			}
 			
 			function startPause()
 			{
@@ -273,7 +246,6 @@
 				running1 = 0;
 				running2 = 0;
 				a = true;
-				f = true;
 				var result1 = out1.fontcolor("red");
 				var result2 = out2.fontcolor("blue");
 				j = j + "DAY " + i + " " + result1 + " " + result2 + "<br>";
@@ -303,6 +275,11 @@
 						if(secs1 < 10){secs1 = "0" + secs1;}
 						if(hours1 >= 3){running1 == 0;}
 						document.getElementById("output1").innerHTML = hours1 + ":" + mins1 + ":" + secs1 + ":" + tenths1;
+						if(secs1%3==0 || secs1 === 0)
+							{	
+								Puck.write('LED2.set();\n');
+								Puck.write('LED2.reset();\n');
+							}
 						increment1();
 					}, 100);
 				}
@@ -322,6 +299,11 @@
 							if(secs2 < 10){secs2 = "0" + secs2;}
 							if(hours2 >= 3){running2 == 0;}
 							document.getElementById("output2").innerHTML = hours2 + ":" + mins2 + ":" + secs2 + ":" + tenths2;
+							if(secs2%3==0 || secs2 === 0)
+							{	
+								Puck.write('LED1.set();\n');
+								Puck.write('LED1.reset();\n');
+							}
 							increment2();
 						}, 100);
 					}
