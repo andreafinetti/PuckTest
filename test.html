@@ -136,6 +136,9 @@
 			var out2 = "";
 			var j = "";
 			var a = true;
+			var f = true;
+			var l1 = 0;
+			var l2 = 0;
 			
 			function startListening(){
 				Puck.eval("BTN.read()",function(x){
@@ -160,26 +163,17 @@
 											{
 												if(a === true)
 												{	
-													Puck.write('LED1.reset();\n');
 													Puck.write('LED3.reset();\n');
-													setInterval(function()
-													{
-														Puck.write('LED2.set();\n');
-														Puck.write('LED2.reset();\n');
-													}, 3000);
+													ledswitch();
 													a = false;
 													startPause();
 													startListening();
 												}
 												else
 												{
-													Puck.write('LED2.reset();\n');
 													Puck.write('LED3.reset();\n');
-													setInterval(function()
-													{
-														Puck.write('LED1.set();\n');
-														Puck.write('LED1.reset();\n');
-													}, 3000);
+													ledswitch();
+													a = true;
 													startPause();
 													startListening();
 												}
@@ -200,6 +194,28 @@
 					}
 				});
 		      	}
+			
+			ledswitch()
+			{
+				if(f)
+				{
+					clearInterval(l2);
+					l1 = setInterval(function()
+						{
+							Puck.write('LED2.set();\n');
+							Puck.write('LED2.reset();\n');
+						}, 3000);
+				}
+				else
+				{
+					clearInterval(l1);
+					l2 = setInterval(function()
+						{
+							Puck.write('LED1.set();\n');
+							Puck.write('LED1.reset();\n');
+						}, 3000);
+				}
+			}
 			
 			function startPause()
 			{
@@ -257,6 +273,7 @@
 				running1 = 0;
 				running2 = 0;
 				a = true;
+				f = true;
 				var result1 = out1.fontcolor("red");
 				var result2 = out2.fontcolor("blue");
 				j = j + "DAY " + i + " " + result1 + " " + result2 + "<br>";
