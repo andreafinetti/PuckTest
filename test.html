@@ -137,8 +137,6 @@
 			var j = "";
 			var a = true;
 			var f = true;
-			var l1 = 0;
-			var l2 = 0;
 			
 			function startListening(){
 				Puck.eval("BTN.read()",function(x){
@@ -161,9 +159,10 @@
 											}
 											else
 											{
-												if(a === true)
+												if(a)
 												{	
 													a = false;
+													f = false;
 													startPause();
 													startListening();
 													Puck.write('LED3.reset();\n');
@@ -172,6 +171,7 @@
 												else
 												{
 													a = true;
+													f = true;
 													startPause();
 													startListening();
 													Puck.write('LED3.reset();\n');
@@ -199,20 +199,20 @@
 			{
 				if(f)
 				{
-					clearInterval(l2);
-					l1 = setInterval(function()
+					setTimeout(function()
 						{
 							Puck.write('LED2.set();\n');
 							Puck.write('LED2.reset();\n');
+							ledswitch();
 						}, 3000);
 				}
 				else
 				{
-					clearInterval(l1);
-					l2 = setInterval(function()
+					setTimeout(function()
 						{
 							Puck.write('LED1.set();\n');
 							Puck.write('LED1.reset();\n');
+							ledswitch();
 						}, 3000);
 				}
 			}
