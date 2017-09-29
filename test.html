@@ -150,27 +150,23 @@
 											{
 												reset();
 												startListening();
-												Puck.write('LED1.reset();\n');
-												Puck.write('LED2.reset();\n');
 												Puck.write('LED3.set();\n');
 												Puck.write('LED3.reset();\n');
 												
 											}
 											else
 											{
-												if(a)
+												if(a === true)
 												{	
 													a = false;
 													startPause();
 													startListening();
-													Puck.write('LED3.reset();\n');
 												}
 												else
 												{
 													a = true;
 													startPause();
 													startListening();
-													Puck.write('LED3.reset();\n');
 												}
 											}
 										});
