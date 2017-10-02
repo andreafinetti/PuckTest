@@ -136,6 +136,7 @@
 			var out2 = "";
 			var j = "";
 			var a = true;
+			var l = 0;
 			
 			function startListening(){
 				Puck.eval("BTN.read()",function(x){
@@ -159,8 +160,6 @@
 											{
 												if(a)
 												{	
-													Puck.write('LED1.reset();\n');
-													Puck.write('LED3.reset();\n');
 													Puck.write('LED2.set();\n');
 													Puck.write('LED2.reset();\n');
 													a = false;
@@ -169,8 +168,6 @@
 												}
 												else
 												{
-													Puck.write('LED2.reset();\n');
-													Puck.write('LED3.reset();\n');
 													Puck.write('LED1.set();\n');
 													Puck.write('LED1.reset();\n');
 													a = true;
@@ -295,6 +292,12 @@
 						if(hours1 >= 3){running1 == 0;}
 						
 						document.getElementById("output1").innerHTML = hours1 + ":" + mins1 + ":" + secs1 + ":" + tenths1;
+						if(secs1%3 == 0)
+						{
+							Puck.write('LED2.set();\n');
+							Puck.write('LED2.reset();\n');
+						}
+						
 						increment1();
 					}, 100);
 				}
@@ -317,6 +320,12 @@
 							
 							document.getElementById("output2").innerHTML = hours2 + ":" + mins2 + ":" + secs2 + ":" + tenths2;
 							
+							if(secs2%3 == 0)
+							{
+							Puck.write('LED1.set();\n');
+							Puck.write('LED1.reset();\n');
+							}
+						
 							increment2();
 						}, 100);
 					}
