@@ -158,11 +158,14 @@
 											{
 												if(a)
 												{	
+													a = false;
 													startPause();
 													startListening();
 												}
 												else
 												{
+													a = true;
+													startPause();
 													startListening();
 												}
 											}
