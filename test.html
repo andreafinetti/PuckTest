@@ -162,6 +162,7 @@
 													a = false;
 													startPause();
 													startListening();
+													Puck.write('LED1.reset();\n');
 													Puck.write('LED2.set();\n');
 												}
 												else
@@ -169,6 +170,7 @@
 													a = true;
 													startPause();
 													startListening();
+													Puck.write('LED2.reset();\n');
 													Puck.write('LED1.set();\n');
 												}
 											}
