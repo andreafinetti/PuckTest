@@ -311,6 +311,7 @@
 							if(mins2 < 10){mins2 = "0" + mins2;}
 							if(secs2 < 10){secs2 = "0" + secs2;}
 							if(hours2 >= 3){running2 == 0;}
+							
 							document.getElementById("output2").innerHTML = hours2 + ":" + mins2 + ":" + secs2 + ":" + tenths2;
 							increment2();
 						}, 100);
@@ -339,7 +340,6 @@
 						if(tenths >= 10){secs++; tenths=0;}
 
 						out1 = "ACTIVE FOR " + hours + ":" + mins + ":" + secs + ":" + tenths;
-
 						document.getElementById("adv1").innerHTML =out1;
 					}
 				}
@@ -352,7 +352,7 @@
 					else
 					{
 
-            var hours = Math.floor(time2/10/60/60) % 60;
+            					var hours = Math.floor(time2/10/60/60) % 60;
 						var mins = Math.floor(time2/10/60) % 60;
 						var secs = Math.floor(time2/10) % 60;
 						var tenths = (time2 % 10)+1;
@@ -364,7 +364,6 @@
 						if(tenths >= 10){secs++; tenths=0;}
 
 						out2 = "INACTIVE FOR " + hours + ":" + mins + ":" + secs + ":" + tenths;
-
 						document.getElementById("adv2").innerHTML =out2;
 					}
 				}
