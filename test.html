@@ -290,7 +290,7 @@
 						if(hours1 >= 3){running1 == 0;}
 						
 						document.getElementById("output1").innerHTML = hours1 + ":" + mins1 + ":" + secs1 + ":" + tenths1;
-						if(secs1%30 == 0)
+						if(time1%300 == 0)
 						{
 							Puck.write('LED2.set();\n');
 							Puck.write('LED2.reset();\n');
@@ -318,7 +318,7 @@
 							
 							document.getElementById("output2").innerHTML = hours2 + ":" + mins2 + ":" + secs2 + ":" + tenths2;
 							
-							if(secs2%30 == 0)
+							if(time2%300 == 0)
 							{
 							Puck.write('LED1.set();\n');
 							Puck.write('LED1.reset();\n');
