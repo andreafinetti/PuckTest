@@ -139,17 +139,18 @@
 			
 			function startListening(){
 				Puck.eval("BTN.read()",function(x){
-					if(x)
-					{
+					if(x){
 						setTimeout(function(){	
 							Puck.eval("BTN.read()",function(x){
-								if(x) {
+								if(x){
 									setTimeout(function() {
 										Puck.eval("BTN.read()",function(x){
 											if(x) 
 											{
 												reset();
 												startListening();
+												Puck.write('LED1.reset();\n');
+												Puck.write('LED2.reset();\n');
 												Puck.write('LED3.set();\n');
 												Puck.write('LED3.reset();\n');
 												
@@ -158,15 +159,24 @@
 											{
 												if(a)
 												{	
+													Puck.write('LED1.reset();\n');
+													Puck.write('LED3.reset();\n');
+													Puck.write('LED2.set();\n');
+													Puck.write('LED2.reset();\n');
 													a = false;
 													startPause();
 													startListening();
 												}
 												else
 												{
+													Puck.write('LED2.reset();\n');
+													Puck.write('LED3.reset();\n');
+													Puck.write('LED1.set();\n');
+													Puck.write('LED1.reset();\n');
 													a = true;
 													startPause();
 													startListening();
+
 												}
 											}
 										});
