@@ -156,16 +156,13 @@
 											}
 											else
 											{
-												if(a === true)
+												if(a)
 												{	
-													a = false;
 													startPause();
 													startListening();
 												}
 												else
 												{
-													a = true;
-													startPause();
 													startListening();
 												}
 											}
@@ -255,6 +252,10 @@
 				document.getElementById("adv1").innerHTML = "ACTIVE FOR 0:00:00:00";
 				document.getElementById("adv2").innerHTML = "INACTIVE FOR 0:00:00:00";
 				document.getElementById("status").innerHTML = "THE USER IS";
+				
+				Puck.write('LED1.reset();\n');
+				Puck.write('LED2.reset();\n');
+				Puck.write('LED3.reset();\n');
 			}
 			function increment1()
 			{
