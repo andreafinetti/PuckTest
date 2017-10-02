@@ -294,12 +294,6 @@
 						if(secs1 < 10){secs1 = "0" + secs1;}
 						if(hours1 >= 3){running1 == 0;}
 						
-						document.getElementById("output1").innerHTML = hours1 + ":" + mins1 + ":" + secs1 + ":" + tenths1;
-						if(secs1%3==0 || secs1 === 0)
-							{	
-								Puck.write('LED2.set();\n');
-								Puck.write('LED2.reset();\n');
-							}
 						increment1();
 					}, 100);
 				}
@@ -321,11 +315,7 @@
 							if(hours2 >= 3){running2 == 0;}
 							
 							document.getElementById("output2").innerHTML = hours2 + ":" + mins2 + ":" + secs2 + ":" + tenths2;
-							if(secs2%3==0 || secs2 === 0)
-							{	
-								Puck.write('LED1.set();\n');
-								Puck.write('LED1.reset();\n');
-							}
+							
 							increment2();
 						}, 100);
 					}
