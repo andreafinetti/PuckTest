@@ -185,7 +185,7 @@
 			
 			function startPause()
 			{
-				if(flag == false)
+				if(flag === false)
 				{
 					running2 = 1;
 				}
@@ -218,32 +218,40 @@
 				var mins1 = Math.floor(time1/10/60) % 60;
 				var secs1 = Math.floor(time1/10) % 60;
 				var tenths1 = (time1 % 10)+1;
+				
 				if(hours1 < 10){hours1 = "0" + hours1;}
 				if(mins1 < 10){mins1 = "0" + mins1;}
 				if(secs1 < 10){secs1 = "0" + secs1;}
 				if(tenths1 >= 10){secs1++; tenths1=0;}
+				
 				out1 = "ACTIVE FOR " + hours1 + ":" + mins1 + ":" + secs1 + ":" + tenths1;
+				
 				var hours2 = Math.floor(time2/10/60/60) % 60;
 				var mins2 = Math.floor(time2/10/60) % 60;
 				var secs2 = Math.floor(time2/10) % 60;
 				var tenths2 = (time2 % 10)+1;
+				
 				if(hours2 < 10){hours2 = "0" + hours2;}
 				if(mins2 < 10){mins2 = "0" + mins2;}
 				if(secs2 < 10){secs2 = "0" + secs2;}
-				if(hours2 >= 3){running2 == 0;}
 				if(tenths2 >= 10){secs2++; tenths2=0;}
+				
 				out2 = "INACTIVE FOR " + hours2 + ":" + mins2 + ":" + secs2 + ":" + tenths2;
+				
 				time1 = -1;
 				time2 = -1;
 				flag = false;
 				running1 = 0;
 				running2 = 0;
+				
 				a = true;
+				
 				var result1 = out1.fontcolor("red");
 				var result2 = out2.fontcolor("blue");
 				j = j + "DAY " + i + " " + result1 + " " + result2 + "<br>";
 				document.getElementById("day").innerHTML = j;
 				i++;
+				
 				document.getElementById("statday").innerHTML = "DAY " + i;
 				document.getElementById("startPause").disabled = false;
 				document.getElementById("output1").innerHTML ="00:00:00:0";
@@ -267,10 +275,12 @@
 						var mins1 = Math.floor(time1/10/60) % 60;
 						var secs1 = Math.floor(time1/10) % 60;
 						var tenths1 = time1 % 10;
+						
 						if(hours1 < 10){hours1 = "0" + hours1;}
 						if(mins1 < 10){mins1 = "0" + mins1;}
 						if(secs1 < 10){secs1 = "0" + secs1;}
 						if(hours1 >= 3){running1 == 0;}
+						
 						document.getElementById("output1").innerHTML = hours1 + ":" + mins1 + ":" + secs1 + ":" + tenths1;
 						if(secs1%3==0 || secs1 === 0)
 							{	
@@ -291,10 +301,12 @@
 							var mins2 = Math.floor(time2/10/60) % 60;
 							var secs2 = Math.floor(time2/10) % 60;
 							var tenths2 = time2 % 10;
+							
 							if(hours2 < 10){hours2 = "0" + hours2;}
 							if(mins2 < 10){mins2 = "0" + mins2;}
 							if(secs2 < 10){secs2 = "0" + secs2;}
 							if(hours2 >= 3){running2 == 0;}
+							
 							document.getElementById("output2").innerHTML = hours2 + ":" + mins2 + ":" + secs2 + ":" + tenths2;
 							if(secs2%3==0 || secs2 === 0)
 							{	
@@ -319,11 +331,13 @@
 						var mins = Math.floor(time1/10/60) % 60;
 						var secs = Math.floor(time1/10) % 60;
 						var tenths = (time1 % 10)+1;
+						
 						if(hours < 10){hours = "0" + hours;}
 						if(mins < 10){mins = "0" + mins;}
 						if(secs < 10){secs = "0" + secs;}
 						if(hours >= 3){running1 == 0;}
 						if(tenths >= 10){secs++; tenths=0;}
+						
 						out1 = "ACTIVE FOR " + hours + ":" + mins + ":" + secs + ":" + tenths;
 						document.getElementById("adv1").innerHTML =out1;
 					}
