@@ -294,6 +294,7 @@
 						if(secs1 < 10){secs1 = "0" + secs1;}
 						if(hours1 >= 3){running1 == 0;}
 						
+						document.getElementById("output1").innerHTML = hours1 + ":" + mins1 + ":" + secs1 + ":" + tenths1;
 						increment1();
 					}, 100);
 				}
